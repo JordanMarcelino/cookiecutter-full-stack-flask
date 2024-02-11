@@ -1,0 +1,16 @@
+docs/site/
+
+# OSX Junk
+.DS_Store
+
+# test cache
+.cache/*
+tests/__pycache__/*
+*.pytest_cache/
+
+.vscode
+.idea
+testing-project
+.mypy_cache
+poetry.lock
+dev-link/
