@@ -10,12 +10,12 @@ services:
         depends_on:
             - db
         environment:
-            FLASK_APP: flaskr
             FLASK_ENV: production
             POSTGRES_DB: flask_fullstack
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_HOST: db
+            JWT_COOKIE_SECURE: True
 
     db:
         image: postgres:latest
