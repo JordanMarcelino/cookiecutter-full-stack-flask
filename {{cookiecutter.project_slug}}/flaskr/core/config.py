@@ -1,10 +1,12 @@
-from typing import List, Optional, Any, Dict
-
+from typing import Any
+from typing import Optional
 from secrets import token_hex
 
-from pydantic import PostgresDsn, field_validator, ValidationInfo
-
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import field_validator
+from pydantic import PostgresDsn
+from pydantic import ValidationInfo
+from pydantic_settings import BaseSettings
+from pydantic_settings import SettingsConfigDict
 
 
 class Settings(BaseSettings):
