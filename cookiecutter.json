@@ -6,5 +6,7 @@
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
     "postgres_user": "postgres",
     "postgres_password": "postgres",
-    "postgres_db": "changethis"
+    "postgres_db": "changethis",
+    "email": "example@gmail.com",
+    "email_app_password": "password (application password not email password)"
 }

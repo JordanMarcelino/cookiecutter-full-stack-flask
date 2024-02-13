@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Cookiecutter flask"
+name = "development"
 version = "1.0.0"
 description = "Cookiecutter template"
 authors = ["example <example@gmail.com>"]
@@ -8,6 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+bcrypt = "^3.2.0"
 Flask = "^3.0.2"
 Flask-SQLAlchemy = "^3.1.1"
 flask-jwt-extended = "^4.6.0"
@@ -21,7 +22,8 @@ pydantic-settings = "^2.1.0"
 loguru = "^0.7.2"
 pytest = "^8.0.0"
 coverage = "^7.4.1"
-bcrypt = "^4.1.2"
+psycopg2 = "^2.9.9"
+python-decouple = "^3.8"
 
 
 [build-system]
