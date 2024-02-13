@@ -4,6 +4,7 @@ FROM python:3.9-slim
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PORT 5000
 
 # Install system dependencies
 RUN apt-get update \
@@ -30,7 +31,7 @@ RUN poetry config virtualenvs.create false \
 COPY . /app/
 
 # Expose the Flask port
-EXPOSE 5000
+EXPOSE $PORT
 
 # Command to run the Flask application
-CMD ["flask", "run"]
+CMD ["flask", "run", "--host 0.0.0.0", "--port $PORT"]
