@@ -21,4 +21,4 @@ class Info(BaseModel):
 # Standard web response
 class WebResponse(Generic[T], BaseModel):
     info: Info
-    data: Union[List[T], T]
+    data: Optional[Union[List[T], T]]

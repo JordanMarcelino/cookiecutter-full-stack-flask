@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <main class="form-signin w-100 m-auto">
+            <form role="form" method="post" action="">
+                {{ form.csrf_token }}
+                <h1 class="h3 mb-3 fw-normal text-center">Log In</h1>
+
+                <div class="form-floating">
+                    {{ form.email(placeholder="email", class="form-control mb-2") }} {{ form.email.label }} {% if form.email.errors %} {% for error in form.email.errors %}
+                    <div class="alert alert-danger" role="alert">{{ error }}</div>
+                    {% endfor %} {% endif %}
+                </div>
+                <div class="form-floating">
+                    {{ form.password(placeholder="password", class="form-control mb-2") }} {{ form.password.label }} {% if form.password.errors %} {% for error in form.password.errors %}
+                    <div class="alert alert-danger" role="alert">{{ error }}</div>
+                    {% endfor %} {% endif %}
+                </div>
+                <button class="w-100 btn btn-md btn-primary" type="submit">Login</button>
+                <p class="text-center mt-3">New User? <a href="{{ url_for('auth.register') }}">Sign Up</a></p>
+            </form>
+        </main>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+{% endblock %}

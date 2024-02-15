@@ -22,13 +22,12 @@ from flaskr.extensions import db
 from flaskr.extensions import login_manager
 from flaskr.extensions import mail
 from flaskr.extensions import jwt
+from flaskr.views import auth_bp
 
 
 def create_app(config: BaseSettings = DevelopmentSettings()) -> Flask:
     app = Flask(__name__)
     app.config.from_object(config)
-
-    logger.debug(app.config)
 
     with app.app_context():
         bcrypt_ext.init_app(app)
@@ -37,6 +36,9 @@ def create_app(config: BaseSettings = DevelopmentSettings()) -> Flask:
         login_manager.init_app(app)
         mail.init_app(app)
         jwt.init_app(app)
+
+        app.register_blueprint(auth_bp, prefix="/auth")
+
         try:
             db.create_all()
         except:

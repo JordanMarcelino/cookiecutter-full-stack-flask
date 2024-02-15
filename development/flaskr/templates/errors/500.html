@@ -1,8 +1,13 @@
 {% extends "base.html" %} {% block content %}
-<h1>500</h1>
-<p>Something's wrong! We are on the job.</p>
-<p>
-    <!-- TODO: Change URL -->
-    <em>Return <a href="">Home</a>?</em>
-</p>
+<div class="container p-4 d-flex flex-column justify-content-center align-items-center">
+    <img src="{{url_for('static', filename='assets/undraw_server_down_s-4-lk.svg')}}" alt="Internal Server Error" style="width: 50vh" />
+    <div class="p-4 text-center">
+        <h1>500</h1>
+        <p>Something's wrong! We are on the job.</p>
+        <p>
+            <!-- TODO: Change URL -->
+            <em>Return <a href="">Home</a>?</em>
+        </p>
+    </div>
+</div>
 {% endblock %}
