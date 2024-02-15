@@ -60,6 +60,18 @@ def create_app(config: BaseSettings = DevelopmentSettings()) -> Flask:
             # Case where there is not a valid JWT. Just return the original response
             return response
 
+    @app.errorhandler(401)
+    def unauthorized_page(error):
+        return render_template("errors/401.html"), 401
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template("errors/404.html"), 404
+
+    @app.errorhandler(500)
+    def server_error_page(error):
+        return render_template("errors/500.html"), 500
+
     @app.route("/")
     def root():
         return render_template("base.html")
