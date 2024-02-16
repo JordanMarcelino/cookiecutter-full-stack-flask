@@ -1,7 +1,6 @@
-from time import time_ns
 from typing import List
 
-from flask import abort
+import pendulum
 
 from .repository import Repository
 from flaskr.entity import User
@@ -10,27 +9,29 @@ from flaskr.extensions import db
 
 
 class UserRepository(Repository[User]):
-    def get(self, email: str) -> User:
+    def get(self, id: str) -> User:
+        return User.query.filter(User.id == id).first_or_404()
+
+    def get_by_email(self, email: str) -> User:
         return User.query.filter(User.email == email).first_or_404()
 
     def get_all(self) -> List[User]:
         pass
 
     def add(self, entity: User) -> None:
-        entity.password = bcrypt_ext.generate_password_hash(entity.password)
-
         db.session.add(entity)
         db.session.commit()
 
-    def update(self, entity: User) -> None:
+    def update(self, entity: User, password: str = None) -> None:
         user: User = User.query.filter(User.id == entity.id).first_or_404()
 
-        if not bcrypt_ext.check_password_hash(user.password, entity.password):
-            abort(401)
+        if entity.email != "":
+            user.email = entity.email
 
-        user.email = entity.email
-        user.password = bcrypt_ext.generate_password_hash(entity.password)
-        user.updated_at = time_ns()
+        if password is not None:
+            user.password = bcrypt_ext.generate_password_hash(password).decode("utf8")
+
+        user.updated_at = pendulum.now().int_timestamp
 
         db.session.add(user)
         db.session.commit()

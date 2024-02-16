@@ -1,14 +1,14 @@
 from uuid import uuid4
-from time import time_ns
 
 from flask_login import UserMixin
+
+from pendulum import now
 
 from sqlalchemy import BigInteger
 from sqlalchemy import Uuid
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 
-from flaskr.extensions import bcrypt_ext
 from flaskr.extensions import db
 
 
@@ -20,13 +20,15 @@ class User(UserMixin, db.Model):
     )
     email: Mapped[str] = mapped_column(nullable=False, unique=True)
     password: Mapped[str] = mapped_column(nullable=False)
-    created_at: Mapped[BigInteger] = mapped_column(
-        BigInteger(), nullable=False, default=time_ns
+    created_at: Mapped[int] = mapped_column(
+        BigInteger(), nullable=False, default=lambda _: now().int_timestamp
     )
-    updated_at: Mapped[BigInteger] = mapped_column(
-        BigInteger(), nullable=False, default=time_ns
+    updated_at: Mapped[int] = mapped_column(
+        BigInteger(), nullable=False, default=lambda _: now().int_timestamp
     )
     is_admin: Mapped[bool] = mapped_column(nullable=False, default=False)
+    is_confirmed: Mapped[bool] = mapped_column(nullable=False, default=False)
+    confirmed_at: Mapped[int] = mapped_column(BigInteger(), nullable=True)
 
     def __repr__(self) -> str:
         return f"<email {self.email}>"

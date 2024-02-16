@@ -15,10 +15,13 @@ class UserRegisterRequest(BaseModel):
 
 
 class AuthResponse(BaseModel):
+    id: str
+    email: EmailStr
     token: str
 
 
 class UserRegisterResponse(BaseModel):
+    id: str
     email: EmailStr
     created_at: datetime
     updated_at: datetime

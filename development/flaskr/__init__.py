@@ -2,43 +2,61 @@ from datetime import datetime
 from datetime import timedelta
 from typing import Any
 
+from decouple import config
+
 from flask import Flask
 from flask import Response
 from flask import render_template
+
+from flask_cors import CORS
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import set_access_cookies
 
-from pydantic_settings import BaseSettings
-
+from flaskr.api.api_v1 import api_auth_bp
+from flaskr.core import dev_settings
 from flaskr.core import logger
-from flaskr.core import DevelopmentSettings
+from flaskr.core import prod_settings
+from flaskr.core import Settings
 from flaskr.entity import User
 from flaskr.extensions import bcrypt_ext
 from flaskr.extensions import csrf
 from flaskr.extensions import db
+from flaskr.extensions import limiter
 from flaskr.extensions import login_manager
 from flaskr.extensions import mail
 from flaskr.extensions import jwt
 from flaskr.views import auth_bp
+from flaskr.views import core_bp
+
+mode = config("MODE", default="dev")
 
 
-def create_app(config: BaseSettings = DevelopmentSettings()) -> Flask:
+def create_app(
+    config: Settings = prod_settings if mode == "production" else dev_settings,
+) -> Flask:
     app = Flask(__name__)
+
     app.config.from_object(config)
 
     with app.app_context():
+        CORS(app, origins="*", resources="*")
+
         bcrypt_ext.init_app(app)
         csrf.init_app(app)
         db.init_app(app)
+        limiter.init_app(app)
         login_manager.init_app(app)
         mail.init_app(app)
         jwt.init_app(app)
 
-        app.register_blueprint(auth_bp, prefix="/auth")
+        app.register_blueprint(core_bp)
+        app.register_blueprint(api_auth_bp)
+        app.register_blueprint(auth_bp)
 
+        logger.debug(app.url_map)
         try:
             db.create_all()
         except:
@@ -70,12 +88,16 @@ def create_app(config: BaseSettings = DevelopmentSettings()) -> Flask:
     def page_not_found(error):
         return render_template("errors/404.html"), 404
 
+    @app.errorhandler(405)
+    def method_not_allowed(error):
+        return render_template("errors/405.html"), 405
+
     @app.errorhandler(500)
     def server_error_page(error):
         return render_template("errors/500.html"), 500
 
-    @app.route("/")
+    @app.get("/")
     def root():
-        return render_template("base.html")
+        return render_template("index.html")
 
     return app

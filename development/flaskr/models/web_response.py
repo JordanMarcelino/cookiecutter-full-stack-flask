@@ -1,5 +1,4 @@
 from typing import Any
-from typing import Dict
 from typing import Generic
 from typing import List
 from typing import Optional
@@ -13,12 +12,12 @@ T = TypeVar("T")
 
 # Response information
 class Info(BaseModel):
-    success: bool
-    meta: Optional[Dict[str, Any]]
+    success: bool = False
+    meta: Any = None
     message: str
 
 
 # Standard web response
 class WebResponse(Generic[T], BaseModel):
     info: Info
-    data: Optional[Union[List[T], T]]
+    data: Optional[Union[List[T], T]] = None

@@ -1,11 +1,10 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block title %} Not Found {% endblock %} {% block content %}
 <div class="container p-4 d-flex flex-column justify-content-center align-items-center">
     <img src="{{url_for('static', filename='assets/undraw_page_not_found_re_e9o6.svg')}}" alt="Not Found" style="width: 50vh" />
     <div class="p-4 text-center">
         <p>There's nothing here!</p>
         <p>
-            <!-- TODO: Change URL -->
-            <em>Return <a href="">Home</a>?</em>
+            <em>Return <a href="{{url_for('root')}}">Home</a>?</em>
         </p>
     </div>
 </div>

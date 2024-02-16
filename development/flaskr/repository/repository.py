@@ -10,7 +10,7 @@ T = TypeVar("T")
 
 class Repository(ABC, Generic[T]):
     @abstractmethod
-    def get(self, id: Union[int | str]) -> T:
+    def get(self, id: Union[int, str]) -> T:
         raise NotImplementedError
 
     @abstractmethod
@@ -26,5 +26,5 @@ class Repository(ABC, Generic[T]):
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, id: Union[int | str]) -> None:
+    def delete(self, id: Union[int, str]) -> None:
         raise NotImplementedError

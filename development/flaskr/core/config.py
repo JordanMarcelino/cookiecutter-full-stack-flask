@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     # Flask Configuration
     FLASK_APP: str
     SECRET_KEY: str = token_urlsafe(16)
-    API_V1_SVR: str = "/api/v1"
+    API_V1_STR: str = "/api/v1"
     DEBUG: bool = False
     TESTING: bool = False
 
@@ -80,3 +80,8 @@ class TestingSettings(Settings):
     SQLALCHEMY_DATABASE_URI: str = "sqlite:///testdb.sqlite"
     BCRYPT_LOG_ROUNDS: int = 1
     WTF_CSRF_ENABLED: bool = False
+
+
+prod_settings = Settings()
+dev_settings = DevelopmentSettings()
+test_settings = TestingSettings()
