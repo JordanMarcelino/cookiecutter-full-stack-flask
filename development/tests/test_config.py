@@ -1,17 +1,17 @@
 import pytest
 
-from flaskr.core import logger
-from flaskr.core import Settings, DevelopmentSettings
+from flaskr.core import dev_settings
+from flaskr.core import Settings
 
 
 @pytest.fixture
 def settings() -> Settings:
-    return DevelopmentSettings()
+    return dev_settings
 
 
 def test_flask_config(settings: Settings):
     assert settings.FLASK_APP == "flaskr"
-    assert settings.API_V1_SVR == "/api/v1"
+    assert settings.API_V1_STR == "/api/v1"
     assert len(settings.SECRET_KEY) == 22
     assert settings.DEBUG is True
     assert settings.DEVELOPMENT is True

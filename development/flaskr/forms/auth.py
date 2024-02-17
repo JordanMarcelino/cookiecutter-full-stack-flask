@@ -30,7 +30,7 @@ class RegisterForm(FlaskForm):
         ],
     )
 
-    def validate(self, extra_validators):
+    def validate(self, extra_validators=None):
         initial_validation = super(RegisterForm, self).validate(extra_validators)
         if not initial_validation:
             return False

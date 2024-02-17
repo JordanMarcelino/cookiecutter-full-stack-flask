@@ -78,7 +78,7 @@ class TestingSettings(Settings):
     TESTING: bool = True
     DEBUG: bool = True
     SQLALCHEMY_DATABASE_URI: str = "sqlite:///testdb.sqlite"
-    BCRYPT_LOG_ROUNDS: int = 1
+    BCRYPT_LOG_ROUNDS: int = 5
     WTF_CSRF_ENABLED: bool = False
 
 

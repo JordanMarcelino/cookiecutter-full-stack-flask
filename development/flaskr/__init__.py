@@ -28,6 +28,7 @@ from flaskr.extensions import limiter
 from flaskr.extensions import login_manager
 from flaskr.extensions import mail
 from flaskr.extensions import jwt
+from flaskr.repository import user_repository
 from flaskr.views import auth_bp
 from flaskr.views import core_bp
 
@@ -56,11 +57,20 @@ def create_app(
         app.register_blueprint(api_auth_bp)
         app.register_blueprint(auth_bp)
 
-        logger.debug(app.url_map)
         try:
             db.create_all()
-        except:
-            logger.error("Error creating table schemas")
+
+            # Add admin user
+            user_repository.add(
+                User(
+                    email="root@gmail.com",
+                    password="root",
+                    is_admin=True,
+                    is_confirmed=True,
+                )
+            )
+        except Exception as exc:
+            logger.error(exc)
 
     @login_manager.user_loader
     def load_user(user_id: str) -> Any:

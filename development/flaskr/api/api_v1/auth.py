@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flask import Blueprint
 from flask import jsonify
 from flask import request
@@ -18,12 +16,12 @@ from flaskr.core import logger
 from flaskr.core import prod_settings
 from flaskr.entity import User
 from flaskr.extensions import bcrypt_ext
-from flaskr.models import AuthResponse
-from flaskr.models import UserLoginRequest
-from flaskr.models import UserRegisterRequest
-from flaskr.models import UserRegisterResponse
-from flaskr.models import WebResponse
-from flaskr.models import Info
+from flaskr.schemas import AuthResponse
+from flaskr.schemas import UserLoginRequest
+from flaskr.schemas import UserRegisterRequest
+from flaskr.schemas import UserRegisterResponse
+from flaskr.schemas import WebResponse
+from flaskr.schemas import Info
 from flaskr.repository import user_repository
 
 api_auth_bp = Blueprint(
@@ -58,6 +56,19 @@ def register():
         )
 
         return jsonify(web_response.model_dump()), 200
+    except (HTTPException, ValidationError) as exc:
+        logger.error(exc)
+
+        if isinstance(exc, HTTPException):
+            info = Info(success=False, message=exc.description)
+            web_response = WebResponse[None](info=info)
+
+            return jsonify(web_response.model_dump()), exc.code
+        elif isinstance(exc, ValidationError):
+            info = Info(success=False, message="bad request", meta=exc.errors())
+            web_response = WebResponse[None](info=info)
+
+            return jsonify(web_response.model_dump()), 400
     except Exception as exc:
         logger.error(exc)
 

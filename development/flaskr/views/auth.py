@@ -24,12 +24,11 @@ from flaskr.core import logger
 from flaskr.core import logout_required
 from flaskr.core import post_request
 from flaskr.core import send_email
-from flaskr.entity import User
 from flaskr.extensions import bcrypt_ext
 from flaskr.forms import LoginForm
 from flaskr.forms import RegisterForm
-from flaskr.models import UserRegisterRequest
-from flaskr.models import UserLoginRequest
+from flaskr.schemas import UserRegisterRequest
+from flaskr.schemas import UserLoginRequest
 from flaskr.repository import user_repository
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
