@@ -21,7 +21,7 @@ WORKDIR /app
 RUN pip install poetry
 
 # Copy only the dependencies file to optimize caching
-COPY poetry.lock pyproject.toml /app/
+COPY pyproject.toml .
 
 # Install project dependencies
 RUN poetry config virtualenvs.create false \
@@ -34,4 +34,4 @@ COPY . /app/
 EXPOSE $PORT
 
 # Command to run the Flask application
-CMD ["flask", "run", "--host 0.0.0.0", "--port $PORT"]
+CMD exec gunicorn --bind 0.0.0.0:${PORT} --workers 1 --threads 8 --timeout 0 flaskr:app

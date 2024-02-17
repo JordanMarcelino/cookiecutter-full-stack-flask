@@ -2,8 +2,6 @@ from datetime import datetime
 from datetime import timedelta
 from typing import Any
 
-from decouple import config
-
 from flask import Flask
 from flask import Response
 from flask import render_template
@@ -27,12 +25,11 @@ from flaskr.extensions import db
 from flaskr.extensions import limiter
 from flaskr.extensions import login_manager
 from flaskr.extensions import mail
+from flaskr.extensions import mode
 from flaskr.extensions import jwt
 from flaskr.repository import user_repository
 from flaskr.views import auth_bp
 from flaskr.views import core_bp
-
-mode = config("MODE", default="dev")
 
 
 def create_app(
@@ -43,7 +40,13 @@ def create_app(
     app.config.from_object(config)
 
     with app.app_context():
-        CORS(app, origins="*", resources="*")
+        CORS(
+            app,
+            resources={
+                # update to FE or production link
+                r"/*": {"origins": ["http://localhost:5000", "https://example.com"]}
+            },
+        )
 
         bcrypt_ext.init_app(app)
         csrf.init_app(app)
@@ -57,13 +60,15 @@ def create_app(
         app.register_blueprint(api_auth_bp)
         app.register_blueprint(auth_bp)
 
+        csrf.exempt(api_auth_bp)
+
         try:
             db.create_all()
 
             # Add admin user
             user_repository.add(
                 User(
-                    email="root@gmail.com",
+                    email="superuser@gmail.com",
                     password="root",
                     is_admin=True,
                     is_confirmed=True,
@@ -111,3 +116,6 @@ def create_app(
         return render_template("index.html")
 
     return app
+
+
+app = create_app()

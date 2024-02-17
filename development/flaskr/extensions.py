@@ -1,5 +1,7 @@
 import bcrypt
 
+from decouple import config
+
 from flask_bcrypt import Bcrypt
 
 from flask_login import LoginManager
@@ -38,3 +40,5 @@ limiter = Limiter(
 login_manager = LoginManager()
 
 mail = Mail()
+
+mode = config("MODE", default="dev")

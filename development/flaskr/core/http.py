@@ -1,10 +1,13 @@
 from typing import Any
 from typing import Dict
+
 from urllib.parse import urlparse
 
 import httpx
 
 from werkzeug.exceptions import InternalServerError
+
+from flaskr.extensions import mode
 
 
 def post_request(
@@ -20,8 +23,6 @@ def post_request(
 
 
 def get_url(base_url: str, endpoint: str):
-    print(base_url)
-    print(endpoint)
     parse_url = urlparse(base_url)
 
     return f"{parse_url.scheme}://{parse_url.hostname}:{parse_url.port}{endpoint}"

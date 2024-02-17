@@ -1,5 +1,10 @@
 .venv/
-__pycache__/
-*.py[cod]
 tests/
+Dockerfile
+README.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
 poetry.lock

@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     FLASK_APP: str
     SECRET_KEY: str = token_urlsafe(16)
     API_V1_STR: str = "/api/v1"
-    DEBUG: bool = False
+    DEBUG: bool = True
     TESTING: bool = False
 
     # SQLAlchemy Configuration

@@ -3,12 +3,13 @@ version: "3"
 services:
     web:
         build:
-            context: .
-            dockerfile: Dockerfile
+            context: ../
+            dockerfile: deploy/Dockerfile
         ports:
             - "5000:5000"
         depends_on:
             - db
+        restart: always
         environment:
             FLASK_ENV: production
             POSTGRES_DB: flask_fullstack
@@ -20,6 +21,7 @@ services:
 
     db:
         image: postgres:latest
+        restart: always
         environment:
             POSTGRES_DB: flask_fullstack
             POSTGRES_USER: postgres
