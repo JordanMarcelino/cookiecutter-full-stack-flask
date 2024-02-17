@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "development"
+name = "{{cookiecutter.project_slug}}"
 version = "1.0.0"
-description = "Cookiecutter template"
-authors = ["example <example@gmail.com>"]
-license = "MIT"
+description = "{{cookiecutter.description}}"
+authors = ["{{cookiecutter.author_name}}"]
+license = "{{cookiecutter.open_source_license}}"
 readme = "README.md"
 
 [tool.poetry.dependencies]

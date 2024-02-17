@@ -15,9 +15,8 @@ from pydantic_settings import SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # TODO: Change to .env.example when finish
     model_config = SettingsConfigDict(
-        case_sensitive=True, env_file_encoding="utf-8", env_file=".env"
+        case_sensitive=True, env_file_encoding="utf-8", env_file=".env.example"
     )
 
     # Flask Configuration
