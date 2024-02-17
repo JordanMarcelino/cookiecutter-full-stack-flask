@@ -26,8 +26,53 @@ $ conda install poetry
 cookiecutter https://github.com/JordanMarcelino/cookiecutter-full-stack-flask.git
 ```
 
+### The resulting directory structure
+
+---
+
+The directory structure of your new project looks like this:
+
+```
+├── LICENSE
+├── .env.example       <- Environment variables for the application
+├── pyproject.toml     <- Poetry dependencies
+├── .gitignore         <- .gitignore file for ignoring specific files
+├── README.md          <- The top-level README for developers using this project.
+├── deploy             <- Docker configuration for building the docker container
+│
+├── flaskr             <- A default Sphinx project; see sphinx-doc.org for details
+│   ├── __init__.py    <- Makes flaskr a Python module
+│   ├── extensions.py  <- Flask extensions
+│   ├── api            <- Scripts to create REST API
+│   ├── core           <- Scripts to create application utilities
+│   ├── entity         <- Scripts to create database schemas
+│   ├── forms          <- Scripts to create flask forms
+│   ├── repository     <- Scripts to create repository layer to communicate with database
+│   ├── schemas        <- Scripts to create http request & response schemas
+│   ├── static         <- Static files
+│   ├── templates      <- HTML file to render
+│   ├── views          <- Scripts to create view layer
+│
+├── models             <- Trained and serialized models, model predictions, or model summaries
+│
+├── instance           <- Temporary sqlite database for testing application
+│
+├── tests              <- Folder that contains unit testing for the application
+```
+
 ## Installing development requirements
 
 ```bash
-$ poetry build
+poetry install
 ```
+
+## Running the tests
+
+```bash
+pytest -v
+```
+
+## Credit
+
+-   https://github.com/drivendata/cookiecutter-data-science
+-   https://github.com/ashutoshkrris/Flask-User-Authentication-With-Email-Verification

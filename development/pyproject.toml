@@ -27,7 +27,6 @@ coverage = "^7.4.1"
 psycopg2 = "^2.9.9"
 python-decouple = "^3.8"
 httpx = "^0.26.0"
-requests = "^2.31.0"
 pendulum = "^3.0.0"
 gunicorn = "^21.2.0"
 
