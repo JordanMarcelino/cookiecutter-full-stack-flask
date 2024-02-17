@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %} Internal Server Error {% endblock %} {% block content %}
 <div class="container p-4 d-flex flex-column justify-content-center align-items-center">
+    {% raw %}
     <img src="{{url_for('static', filename='assets/undraw_server_down_s-4-lk.svg')}}" alt="Internal Server Error" style="width: 50vh" />
     <div class="p-4 text-center">
         <h1>500</h1>
@@ -8,5 +9,6 @@
             <em>Return <a href="{{url_for('root')}}">Home</a>?</em>
         </p>
     </div>
+    {% endraw %}
 </div>
 {% endblock %}

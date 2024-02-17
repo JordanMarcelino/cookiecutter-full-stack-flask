@@ -1,4 +1,3 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %} {% raw %}
 <h1 class="text-center">Welcome {{current_user.email}}!</h1>
-
-{% endblock %}
+{% endraw %} {% endblock %}
