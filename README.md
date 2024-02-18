@@ -20,6 +20,11 @@ $ conda install cookiecutter
 $ conda install poetry
 ```
 
+## How to get email application password?
+- Open your google account settings
+- Search for application password
+- Enter the application name and you will received the secret key
+
 ## To start a new project, run:
 
 ```bash
