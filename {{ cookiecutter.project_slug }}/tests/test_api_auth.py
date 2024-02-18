@@ -8,7 +8,7 @@ from flaskr.schemas import UserRegisterRequest
 def test_register_success(client: FlaskClient):
     payload = UserRegisterRequest(
         email="test@gmail.com",
-        password=bcrypt_ext.generate_password_hash("secret").decode("utf8"),
+        password="secret",
     )
     response = client.post(
         "/api/v1/auth/register",
@@ -29,7 +29,7 @@ def test_register_failed_invalid_email_format(client: FlaskClient):
         "/api/v1/auth/register",
         json=dict(
             email="test",
-            password=bcrypt_ext.generate_password_hash("secret").decode("utf8"),
+            password="secret",
         ),
         follow_redirects=True,
     )
@@ -101,7 +101,7 @@ def test_login_failed_invalid_email_format(client: FlaskClient):
         "/api/v1/auth/login",
         json=dict(
             email="test",
-            password=bcrypt_ext.generate_password_hash("secret").decode("utf8"),
+            password="secret",
         ),
         follow_redirects=True,
     )

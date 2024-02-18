@@ -19,17 +19,21 @@ class UserRepository(Repository[User]):
         pass
 
     def add(self, entity: User) -> None:
+        entity.password = bcrypt_ext.generate_password_hash(entity.password).decode(
+            "utf8"
+        )
+
         db.session.add(entity)
         db.session.commit()
 
-    def update(self, entity: User, password: str = None) -> None:
+    def update(self, entity: User) -> None:
         user: User = User.query.filter(User.id == entity.id).first_or_404()
 
         if entity.email != "":
             user.email = entity.email
 
-        if password is not None:
-            user.password = bcrypt_ext.generate_password_hash(password).decode("utf8")
+        if entity.password != "":
+            user.password = entity.password
 
         user.updated_at = pendulum.now().int_timestamp
 

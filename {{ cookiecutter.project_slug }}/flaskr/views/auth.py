@@ -45,9 +45,7 @@ def register():
             form.password.data,
         )
 
-        hashed_password = bcrypt_ext.generate_password_hash(password).decode("utf8")
-
-        req = UserRegisterRequest(email=email, password=hashed_password)
+        req = UserRegisterRequest(email=email, password=password)
 
         res = post_request(
             get_url(request.base_url, url_for("api_auth.register")),

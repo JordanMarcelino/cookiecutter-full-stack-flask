@@ -21,15 +21,13 @@ def app() -> Generator[Flask, None, None]:
         user_repository.add(
             User(
                 email="unconfirmeduser@gmail.com",
-                password=bcrypt_ext.generate_password_hash("unconfirmed").decode(
-                    "utf8"
-                ),
+                password="unconfirmed",
             )
         )
         user_repository.add(
             User(
                 email="confirmeduser@gmail.com",
-                password=bcrypt_ext.generate_password_hash("confirmed").decode("utf8"),
+                password="confirmed",
                 is_confirmed=True,
             )
         )
