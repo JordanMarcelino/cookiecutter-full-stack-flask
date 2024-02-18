@@ -26,6 +26,8 @@ $ conda install poetry
 cookiecutter https://github.com/JordanMarcelino/cookiecutter-full-stack-flask.git
 ```
 
+[![asciicast](https://asciinema.org/a/cWDQIp7Gh7j0gWEKA2mCjapJ2.svg)](https://asciinema.org/a/cWDQIp7Gh7j0gWEKA2mCjapJ2)
+
 ### The resulting directory structure
 
 ---
