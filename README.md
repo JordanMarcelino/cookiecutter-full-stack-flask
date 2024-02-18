@@ -34,7 +34,7 @@ The directory structure of your new project looks like this:
 
 ```
 ├── LICENSE
-├── .env.example       <- Environment variables for the application
+├── .env               <- Environment variables for the application
 ├── pyproject.toml     <- Poetry dependencies
 ├── .gitignore         <- .gitignore file for ignoring specific files
 ├── README.md          <- The top-level README for developers using this project.
